@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Play Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="website icon" type="png" href="Playtournament.png">
+</head>
+
+<body>
+
+    <form action="">
+        <h1 class="h1">Try Guessing The Number</h1>
+        <p></p>
+        <p></p>
+        <p>Try and guess the number between 1 and 100</p>
+        <p>You have 10 attempts to guess it</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <h2>Enter your Number</h2>
+        <div id="userInput">
+            <input class="text" type="text">
+        </div>
+        <div id="submit">
+            <input class="subt" type="submit">
+        </div>
+        <div class="resultPara">
+            <div class="previousGuess">Previous Guesses : <span class="guessSlot"></span></div>
+            <div class="remainingGuess">Remaining Guesses <span class="remaining">10</span>:</div>
+            <p class="display"></p>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
