@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+<!-- Stylesheet -->
+<link rel="stylesheet" href="styles.css">
+<link rel="website icon" type="png" href="Playtournament.png">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+        </div>
+    </div>
+
+
+    <!-- Script -->
+    <script>
+        const container = document.querySelector('.container');
+        const btnOpt = document.querySelectorAll('.button-option');
+        const message = document.getElementById('message');
+        let turn = 0;
+        let count = 0;
+        btnOpt.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (turn === 0) {
+                    btn.innerHTML = 'O';
+                    turn = 1;
+                    count++;
+                }
+                else if (turn === 1) {
+                    btn.innerHTML = 'X';
+                    turn = 0;
+                    count++;
+                }
+
+                console.log(`${turn}`);
+                console.log(`${count}`);
+                if(count>4)
+                checkWin();
+
+
+            });
+        });
+
+        function checkWin() {
+
+            if (btnOpt[0].innerHTML === btnOpt[4].innerHTML && btnOpt[0].innerHTML === btnOpt[8].innerHTML  && btnOpt[0].innerHTML !== '') {
+                turn = 2;
+                btnOpt[0].classList.add('winning');
+                btnOpt[4].classList.add('winning');
+                btnOpt[8].classList.add('winning');
+            }
+
+            else if (btnOpt[2].innerHTML === btnOpt[4].innerHTML && btnOpt[2].innerHTML === btnOpt[6].innerHTML && btnOpt[2].innerHTML !== '') {
+                turn = 2;
+                btnOpt[2].classList.add('winning');
+                btnOpt[4].classList.add('winning');
+                btnOpt[6].classList.add('winning');
+            }
+
+            else if(count === 9){
+                for (let i = 0; i < 9; i++) {
+                    btnOpt[i].classList.add('draw');                    
+                }
+            }
+
+            else {
+                for (let i = 0; i < 7; i = i + 3) {
+                    if (btnOpt[i].innerHTML === btnOpt[i + 1].innerHTML && btnOpt[i].innerHTML === btnOpt[i + 2].innerHTML  && btnOpt[i].innerHTML !== '') {
+                        turn = 2;
+                        btnOpt[i].classList.add('winning');
+                        btnOpt[i + 1].classList.add('winning');
+                        btnOpt[i + 2].classList.add('winning');
+                    }
+                }
+
+                for (let i = 0; i < 3; i = i + 1) {
+                    if (btnOpt[i].innerHTML === btnOpt[i + 3].innerHTML && btnOpt[i].innerHTML === btnOpt[i + 6].innerHTML  && btnOpt[i].innerHTML !== '') {
+                        turn = 2;
+                        btnOpt[i].classList.add('winning');
+                        btnOpt[i + 3].classList.add('winning');
+                        btnOpt[i + 6].classList.add('winning');
+                    }
+                }
+            }
+        };
+
+    </script>
+
+</body>
+
+</html>
