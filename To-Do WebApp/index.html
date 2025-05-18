@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="head">
+            <h2>Todo</h2>
+            <p>List your work that need to be done one time</p>
+        </div>
+        <div id="items">
+            
+        </div>
+        <div id="filterCompleted">
+        
+        </div>
+        <div id="filterActive">
+        
+        </div>
+        <div id="features">
+            <button class="allTodo">All Todo</button>
+            <button class="activeTodo">Active Todo</button>
+            <button class="completedTodo">Completed Todo</button>
+        </div>
+        <div id="addText">
+            <input type="text" class="input" placeholder="Write a blog to post" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Write a blog to post'">
+            <button class="update">Update</button>
+        </div>
+    </div>
+    
+<script>
+    const input = document.querySelector('#addText input');
+    const dropText = document.querySelector('#items');
+    const button = document.querySelector('.update');
+    const filterCompleted = document.querySelector('#filterCompleted');
+    const filterActive = document.querySelector('#filterActive');
+    const completedTodo = document.querySelector('.completedTodo');
+    const allTodo = document.querySelector('.allTodo');
+    const activeTodo = document.querySelector('.activeTodo');
+
+    // so that we can retrieve tasks after refreshing the page    
+    let tasks = JSON.parse(localStorage.getItem('todoTasks')) || [];
+
+        function saveTasks() {
+            localStorage.setItem('todoTasks', JSON.stringify(tasks));
+        }
+    // Add new task
+    button.addEventListener('click', () => {
+        const value = input.value.trim();
+        if (value !== '') {
+            const task = { text: value, completed: false };
+            tasks.push(task);
+            saveTasks();
+            renderTasks();
+            input.value = '';
+        } else {
+            alert('Add a task');
+        }
+    });
+
+    // Render all tasks
+    function renderTasks() {
+        dropText.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const taskHTML = `
+                <div id="taskBox">  
+                    <div class="task">
+                        <input type="checkbox" class="checkBox" data-index="${index}" ${task.completed ? 'checked' : ''}> 
+                        <p class="Text" style="text-decoration:${task.completed ? 'line-through' : 'none'}">${task.text}</p> 
+                    </div>                 
+                    <button class="delete" data-index="${index}">Delete</button>
+                </div>
+                <hr>
+            `;
+            dropText.innerHTML += taskHTML;
+        });
+
+        // Add event listeners to checkboxes and delete buttons
+        document.querySelectorAll('.checkBox').forEach(cb => {
+            cb.addEventListener('change', (e) => {
+                const idx = e.target.dataset.index;
+                tasks[idx].completed = e.target.checked;
+                saveTasks(); // so that the todo still reain after refreshing
+                renderTasks(); // re-render after update
+            });
+        });
+
+        document.querySelectorAll('.delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = e.target.dataset.index;
+                tasks.splice(idx, 1);
+                saveTasks();
+                renderTasks(); // re-render after delete
+            });
+        });
+    }
+
+    // Filter: Completed
+    completedTodo.addEventListener('click', () => {
+        filterCompleted.innerHTML = '';
+        filterCompleted.style.display = 'block';
+        dropText.style.display = 'none';
+        filterActive.style.display = 'none';
+
+        tasks.forEach((task) => {
+            if (task.completed) {
+                filterCompleted.innerHTML += `<p class = "task2">${task.text}</p>
+                                                <hr>`;
+            }
+        });
+    });
+
+    // Filter: Active
+    activeTodo.addEventListener('click', () => {
+        filterActive.innerHTML = '';
+        filterActive.style.display = 'block';
+        dropText.style.display = 'none';
+        filterCompleted.style.display = 'none';
+
+        tasks.forEach((task) => {
+            if (!task.completed) {
+                filterActive.innerHTML += `<p class="task2">${task.text}</p>
+                                           <hr>`;
+            }
+        });
+    });
+
+    // Show All
+    allTodo.addEventListener('click', () => {
+        renderTasks();
+        dropText.style.display = 'block';
+        filterCompleted.style.display = 'none';
+        filterActive.style.display = 'none';
+    });
+
+    // Initial state
+    renderTasks();
+</script>
+
+</body>
+</html>
