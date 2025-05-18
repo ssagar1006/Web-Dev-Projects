@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Play</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="website icon" type="png" href="Playtournament.png">
+</head>
+
+<body>
+    <h1>Rock Paper Scissors Game</h1>
+    <p>Choose your move:</p>
+    <div class="buttons">
+        <button id="rock">&#x1F44A;</button>
+        <button id="paper">&#x1f590;</button>
+        <button id="scissors">&#x270c;</button>
+    </div>
+    
+    <p>Computer's move</p>
+    <div id="compAns">
+    
+    </div>
+    
+    <p id="result"></p>
+    <p id="scores">
+        Your score: <span id="user-score">0</span>
+        Computer score: <span id="computer-score">0</span>
+    </p>
+
+
+    
+    <script>
+        const randomNo = () => {
+            return Math.floor(Math.random()*3);
+        };
+        // console.log(num);
+
+        const compScore = document.getElementById('computer-score');
+        const userScore = document.getElementById('user-score');
+        const rock = document.getElementById('rock');
+        const paper = document.getElementById('paper');
+        const scissors = document.getElementById('scissors');
+        const compAns = document.getElementById('compAns');
+        
+        let score1 = 0;
+        let score2 = 0;
+        rock.addEventListener('click', () => {
+            let num = randomNo();
+                
+                if (num === 0) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '👊'; // or use '&#x1F44A;' for fist emoji
+                    add.style.backgroundColor = 'red';
+
+                    compAns.innerHTML = ''; // Optional: Clear existing content
+                    compAns.appendChild(add);
+                    result.innerHTML = 'Again Please'
+                }
+
+                else if (num === 1) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x1f590'; 
+                    add.style.backgroundColor = '#2196f3';
+
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'I Won!'
+                    score2++;
+                    compScore.innerText = score2;
+                }
+                
+                else if (num === 2) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x270c';
+                    add.style.backgroundColor = '#4caf50';
+                    
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'You Won!'
+                    score1++;
+                    userScore.innerText = score1;
+                }
+            });
+            
+            scissors.addEventListener('click', () => {
+                let num = randomNo();
+                
+                if (num === 0) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '👊'; // or use '&#x1F44A;' for fist emoji
+                    add.style.backgroundColor = 'red';
+                    
+                    compAns.innerHTML = ''; // Optional: Clear existing content
+                    compAns.appendChild(add);
+                    result.innerHTML = 'I Won!'
+                    score2++;
+                    compScore.innerText = score2;
+                }
+                
+                else if (num === 1) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x1f590'; 
+                    add.style.backgroundColor = '#2196f3';
+                    
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'You Won!'
+                    score1++;
+                    userScore.innerText = score1;
+                }
+                
+                else if (num === 2) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x270c';
+                    add.style.backgroundColor = '#4caf50';
+                    
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'Again Please'
+                }
+            });
+            
+            paper.addEventListener('click', () => {
+                let num = randomNo();
+                
+                if (num === 0) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '👊'; // or use '&#x1F44A;' for fist emoji
+                    add.style.backgroundColor = 'red';
+                    
+                    compAns.innerHTML = ''; // Optional: Clear existing content
+                    compAns.appendChild(add);
+                    result.innerHTML = 'You Won!'
+                    score1++;
+                    userScore.innerText = score1;
+                }
+                
+                else if (num === 1) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x1f590'; 
+                    add.style.backgroundColor = '#2196f3';
+                    
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'Again Please'
+                }
+                
+                else if (num === 2) {
+                    const add = document.createElement('button');
+                    add.id = 'Ans';
+                    add.innerHTML = '&#x270c';
+                    add.style.backgroundColor = '#4caf50';
+                    compAns.innerHTML = ''; 
+                    compAns.appendChild(add);
+                    result.innerHTML = 'I Won!'
+                    score2++;
+                    compScore.innerText = score2;
+                }
+            });
+
+    </script>
+</body>
+
+</html>
