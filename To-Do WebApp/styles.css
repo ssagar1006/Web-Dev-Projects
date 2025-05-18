@@ -132,3 +132,6 @@ body {
 .task2{
     padding: 1rem 1rem 1rem 1rem;
 }
+.task{
+    gap: 0.4rem;
+}
